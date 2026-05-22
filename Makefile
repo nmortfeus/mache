@@ -10,9 +10,6 @@ TARGET=mache
 mash: $(OBJS)
 	$(CC) -o $(TARGET) $^
 
-run: mash
-	./mash
-
 .PHONY: clean
 
 clean:
