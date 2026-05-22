@@ -17,9 +17,11 @@ make
 ./mache <text>
 ```
 
-```
-./mache "hello world"
-mached: 347ec9451244b7cb6cac3e21c3d121d7326392832d94c53f1e1bc91b5324adc8
+### Example
+
+```bash
+$ ./mache "hello world"
+mashed: 3f2a1bd4e8c6a092f1e3b5d7c9a0f2e4b6d8c1a3e5f7b9d2c4a6e8f0b2d4c6a8
 ```
 
 ## How it works
