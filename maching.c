@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "maching.h"
@@ -23,14 +22,15 @@ unsigned char **create_blocks(const unsigned char *text, size_t len,
     for (size_t i = 0; i < len; i++) {
         blocks[i / SIZE_OF_MACHED][i % SIZE_OF_MACHED] = text[i];
     }
-    if (len % SIZE_OF_MACHED == 0) {
-        for (size_t i = 0; i < SIZE_OF_MACHED; i++) {
-            blocks[len / SIZE_OF_MACHED][i] = i + 1;
-        }
-    } else {
-        for (size_t i = len; i % SIZE_OF_MACHED != 0; i++) {
-            blocks[len / SIZE_OF_MACHED][i % SIZE_OF_MACHED] = i - len + 1;
-        }
+    size_t padding_index;
+    for (padding_index = len; padding_index % SIZE_OF_MACHED != 0;
+         padding_index++) {
+        blocks[padding_index / SIZE_OF_MACHED][padding_index % SIZE_OF_MACHED] =
+            padding_index - len + 1;
+    }
+    unsigned char padding = padding_index - len;
+    for (int i = 0; i < SIZE_OF_MACHED; i++) {
+        blocks[padding_index / SIZE_OF_MACHED][i] = i + padding + 1;
     }
     blocks[numberBlocks] = NULL;
     return blocks;
@@ -97,23 +97,20 @@ unsigned char *maching(const unsigned char *text, size_t len) {
         return NULL;
     }
 
-    size_t numberBlocks = len / SIZE_OF_MACHED + 1;
+    size_t numberBlocks =
+        len / SIZE_OF_MACHED + 1 + (len % SIZE_OF_MACHED == 0 ? 0 : 1);
     unsigned char **blocks = create_blocks(text, len, numberBlocks);
     if (blocks == NULL) {
         free(mached);
         return NULL;
     }
-
     for (int i = 0; i < HASH_ROUNDS; i++) {
         block_byte_rotate_shift(blocks);
         byte_rotate_left(blocks);
-        if (numberBlocks > 1) {
-            cross_block_mix(blocks, numberBlocks);
-        }
+        cross_block_mix(blocks, numberBlocks);
         diffuse_last_byte(blocks);
         accumulate_xor(blocks, mached);
     }
-
     destroy_blocks(blocks);
     return mached;
 }
