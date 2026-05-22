@@ -5,22 +5,22 @@ Implements custom diffusion, confusion and avalanche techniques.
 
 ## Build
 
-\```bash
+```bash
 git clone https://github.com/nmortfeus/mache
 cd mache
 make
-\```
+```
 
 ## Usage
 
-\```bash
+```bash
 ./mache <text>
-\```
+```
 
-\```
-$ ./mache "hello world"
+```
+./mache "hello world"
 mached: 347ec9451244b7cb6cac3e21c3d121d7326392832d94c53f1e1bc91b5324adc8
-\```
+```
 
 ## How it works
 
