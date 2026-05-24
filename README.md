@@ -15,7 +15,3 @@ make
 ```bash
 ./mache <text>
 ```
-
-## License
-
-MIT
