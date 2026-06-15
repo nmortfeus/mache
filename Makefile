@@ -7,8 +7,9 @@ OBJS=$(SRCS:.c=.o)
 
 TARGET=mache
 
-mash: $(OBJS)
+mache: $(OBJS)
 	$(CC) -o $(TARGET) $^
+
 
 .PHONY: clean
 
