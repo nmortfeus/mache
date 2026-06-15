@@ -5,7 +5,7 @@ Experimental 256-bit hashing function written in C
 ## Build
 
 ```bash
-git clone https://https://github.com/nmortfeus/mache
+git clone git@github.com:nmortfeus/mache.git
 cd mache
 make
 ```
